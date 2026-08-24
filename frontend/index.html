@@ -26,7 +26,11 @@ function login() {
     if(data.tipo === "triagem") location.href = "triagem.html";
     if(data.tipo === "medico") location.href = "medico.html";
     if(data.tipo === "atendimento") location.href = "atendimento.html";
-  });
+  })
+  .catch(error =>{
+    alert(error.messagem);
+    console.error(error);
+});
 }
 </script>
 </body>
