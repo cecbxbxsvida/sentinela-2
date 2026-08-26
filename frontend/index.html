@@ -1,43 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Hospital</title>
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-<div class="container">
-  <h2>🏥 Sistema Hospitalar</h2>
-  <input id="usuario" placeholder="Usuário">
-  <input id="senha" type="password" placeholder="Senha">
-  <button onclick="login()">Entrar</button>
-</div>
 
-<script>
-function login() {
+    <div class="container">
+        <h2>Sistema Hospitalar</h2>
 
-const usuario = document.getElementById("usuario").value;
-const senha = document.getElementById("senha").value;
+        <input type="text" id="usuario" placeholder="Usuário">
+        <input type="password" id="senha" placeholder="Senha">
 
+        <button onclick="login()">Entrar</button>
+    </div>
 
-  
-  fetch("/login", {+
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
-      usuario: usuario.value,
-      senha: senha.value
-    })
-  })
-  .then(r => r.json())
-  .then(data => {
-    if(data.tipo === "triagem") location.href = "triagem.html";
-    if(data.tipo === "medico") location.href = "medico.html";
-    if(data.tipo === "atendimento") location.href = "atendimento.html";
-  })
-  .catch(error =>{
-    alert(error.messagem);
-    console.error(error);
-});
-}
-</script>
+    <script>
+        function login() {
+
+            const usuario = document.getElementById("usuario").value;
+            const senha = document.getElementById("senha").value;
+
+            fetch("/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    usuario,
+                    senha
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Usuário ou senha inválidos");
+                }
+                return response.json();
+            })
+                .the(r => r.json())
+            .then(data => {
+
+                if (data.tipo === "triagem") location.href = "triagem.html";
+                if (data.tipo === "medico")location.href = "medico.html";
+                if (data.tipo === "atendimento")location.href = "atendimento.html";
+               
+            })
+            .catch(error => {
+                alert(error.message);
+                console.error(error);
+            });
+        }
+    </script>
+
 </body>
 </html>
