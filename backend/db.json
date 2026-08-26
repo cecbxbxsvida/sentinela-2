@@ -16,7 +16,6 @@
       "tipo": "atendimento"
     }
   ],
-
   "pacientes": [
     {
       "id": 17768577188699,
@@ -27,8 +26,6 @@
       "createdAt": "2026-04-22T11:35:28.699Z"
     }
   ],
-
   "triagens": [],
-
   "consultas": []
 }
