@@ -3,55 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Login Hospital</title>
+
     <link rel="stylesheet" href="css/index.css">
 </head>
+
 <body>
 
     <div class="container">
+
         <h2>Sistema Hospitalar</h2>
 
-        <input type="text" id="usuario" placeholder="Usuário">
-        <input type="password" id="senha" placeholder="Senha">
+        <input
+            type="text"
+            id="usuario"
+            placeholder="Usuário"
+            autocomplete="username"
+        >
+
+        <input
+            type="password"
+            id="senha"
+            placeholder="Senha"
+            autocomplete="current-password"
+        >
 
         <button onclick="login()">Entrar</button>
+
     </div>
 
     <script>
-        function login() {
 
-            const usuario = document.getElementById("usuario").value;
+        async function login() {
+
+            const usuario = document.getElementById("usuario").value.trim();
             const senha = document.getElementById("senha").value;
 
-            fetch("/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    usuario,
-                    senha
-                })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Usuário ou senha inválidos");
-                }
-                return response.json();
-            })
-                .the(r => r.json())
-            .then(data => {
+            if (!usuario || !senha) {
+                alert("Digite o usuário e a senha.");
+                return;
+            }
 
-                if (data.tipo === "triagem") location.href = "triagem.html";
-                if (data.tipo === "medico")location.href = "medico.html";
-                if (data.tipo === "atendimento")location.href = "atendimento.html";
-               
-            })
-            .catch(error => {
+            try {
+
+                const response = await fetch("/login", {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        usuario: usuario,
+                        senha: senha
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.erro || "Usuário ou senha inválidos.");
+                }
+
+                console.log("Login realizado:", data);
+
+                // Redireciona de acordo com o tipo de usuário
+
+                if (data.tipo === "triagem") {
+                    window.location.href = "/triagem.html";
+                    return;
+                }
+
+                if (data.tipo === "medico") {
+                    window.location.href = "/medico.html";
+                    return;
+                }
+
+                if (data.tipo === "atendimento") {
+                    window.location.href = "/atendimento.html";
+                    return;
+                }
+
+                alert("Tipo de usuário não reconhecido.");
+
+            } catch (error) {
+
+                console.error("Erro no login:", error);
+
                 alert(error.message);
-                console.error(error);
-            });
+            }
         }
+
+        // Permite apertar ENTER para fazer login
+        document.getElementById("senha").addEventListener("keydown", function(event) {
+
+            if (event.key === "Enter") {
+                login();
+            }
+
+        });
+
     </script>
 
 </body>
