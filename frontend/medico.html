@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
+
 <head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="css/style.css">
 
-  <style>
+  <title>Painel Médico</title>
 
-    /* =========================
-       BOTÃO DA TV
-    ========================= */
+  <style>
 
     .btn-tv {
       background: #28a745;
@@ -20,10 +23,9 @@
       margin-top: 8px;
     }
 
-    .btn-tv:hover {
-      background: #1e7e34;
+    .btn-abrir-tv:hover {
+      background: #117a8b;
     }
-
 
     .btn-abrir-tv {
       background: #17a2b8;
@@ -34,15 +36,6 @@
       font-size: 14px;
       cursor: pointer;
     }
-
-    .btn-abrir-tv:hover {
-      background: #117a8b;
-    }
-
-
-    /* =========================
-       CONSULTÓRIO
-    ========================= */
 
     .consultorio-input {
       display: flex;
@@ -71,7 +64,7 @@
 
 
     /* =========================
-       NOVO BOTÃO DAR ALTA
+       BOTÃO ALTA
     ========================= */
 
     .btn-alta {
@@ -90,13 +83,14 @@
 
 
     /* =========================
-       MODAL DE ALTA
+       MODAL
     ========================= */
 
     .modal-alta {
       display: none;
 
       position: fixed;
+
       z-index: 9999;
 
       left: 0;
@@ -105,18 +99,20 @@
       width: 100%;
       height: 100%;
 
-      background: rgba(0, 0, 0, 0.55);
+      background: rgba(0,0,0,0.55);
 
-      justify-content: center;
       align-items: center;
+      justify-content: center;
     }
 
 
-    .modal-alta-content {
+    .modal-alta-conteudo {
+
       background: white;
 
       width: 95%;
-      max-width: 650px;
+
+      max-width: 700px;
 
       max-height: 90vh;
 
@@ -131,9 +127,11 @@
 
 
     .modal-alta-header {
+
       display: flex;
 
       justify-content: space-between;
+
       align-items: center;
 
       margin-bottom: 20px;
@@ -145,12 +143,15 @@
 
 
     .modal-alta-header h2 {
+
       margin: 0;
+
       color: #dc3545;
     }
 
 
-    .btn-fechar-alta {
+    .fechar-modal {
+
       background: transparent;
 
       border: none;
@@ -164,15 +165,17 @@
 
 
     /* =========================
-       FORMULÁRIO
+       CAMPOS
     ========================= */
 
     .campo-alta {
+
       margin-bottom: 16px;
     }
 
 
     .campo-alta label {
+
       display: block;
 
       margin-bottom: 6px;
@@ -186,6 +189,7 @@
     .campo-alta input,
     .campo-alta select,
     .campo-alta textarea {
+
       width: 100%;
 
       padding: 10px;
@@ -201,26 +205,103 @@
 
 
     .campo-alta textarea {
+
       min-height: 90px;
 
       resize: vertical;
     }
 
 
-    .info-paciente-alta {
+    /* =========================
+       MEDICAÇÕES
+    ========================= */
+
+    .medicacoes-box {
+
       background: #f8f9fa;
 
-      padding: 12px;
+      border: 1px solid #ddd;
 
-      border-radius: 6px;
+      border-radius: 8px;
 
-      margin-bottom: 20px;
+      padding: 15px;
 
-      border-left: 4px solid #dc3545;
+      margin-top: 8px;
     }
 
 
+    .medicacao-item {
+
+      background: white;
+
+      border: 1px solid #ddd;
+
+      border-radius: 7px;
+
+      padding: 15px;
+
+      margin-bottom: 12px;
+    }
+
+
+    .medicacao-titulo {
+
+      font-weight: bold;
+
+      margin-bottom: 10px;
+
+      color: #333;
+    }
+
+
+    .btn-adicionar-medicacao {
+
+      background: #007bff;
+
+      color: white;
+
+      border: none;
+
+      padding: 10px 15px;
+
+      border-radius: 5px;
+
+      cursor: pointer;
+
+      margin-top: 5px;
+    }
+
+
+    .btn-adicionar-medicacao:hover {
+
+      background: #0056b3;
+    }
+
+
+    .btn-remover-medicacao {
+
+      background: #dc3545;
+
+      color: white;
+
+      border: none;
+
+      padding: 6px 10px;
+
+      border-radius: 5px;
+
+      cursor: pointer;
+
+      margin-top: 8px;
+    }
+
+
+    /* =========================
+       BOTÕES
+    ========================= */
+
     .botoes-alta {
+
       display: flex;
 
       justify-content: flex-end;
@@ -232,6 +313,7 @@
 
 
     .btn-cancelar-alta {
+
       background: #6c757d;
 
       color: white;
@@ -247,6 +329,7 @@
 
 
     .btn-confirmar-alta {
+
       background: #dc3545;
 
       color: white;
@@ -262,11 +345,32 @@
       font-weight: bold;
     }
 
+
     .btn-confirmar-alta:hover {
+
       background: #b02a37;
     }
 
+
+    /* =========================
+       PACIENTE
+    ========================= */
+
+    .info-paciente-alta {
+
+      background: #f8f9fa;
+
+      padding: 12px;
+
+      border-radius: 6px;
+
+      margin-bottom: 20px;
+
+      border-left: 4px solid #dc3545;
+    }
+
   </style>
+
 </head>
 
 
@@ -276,7 +380,9 @@
 <div class="container">
 
 
-  <!-- CABEÇALHO -->
+  <!-- =========================
+       CABEÇALHO
+  ========================= -->
 
   <div style="
     display:flex;
@@ -300,7 +406,9 @@
   </div>
 
 
-  <!-- CONSULTÓRIO -->
+  <!-- =========================
+       CONSULTÓRIO
+  ========================= -->
 
   <div class="consultorio-input">
 
@@ -324,7 +432,9 @@
   </div>
 
 
-  <!-- LISTA DE TRIAGENS -->
+  <!-- =========================
+       PACIENTES
+  ========================= -->
 
   <div id="triagens"></div>
 
@@ -332,7 +442,9 @@
   <hr>
 
 
-  <!-- CONSULTA -->
+  <!-- =========================
+       CONSULTA
+  ========================= -->
 
   <h3>
     Consulta
@@ -358,6 +470,48 @@
       Selecione a medicação
     </option>
 
+    <!-- OPÇÕES DE MEDICAÇÃO -->
+
+    <option value="Dipirona">
+      Dipirona
+    </option>
+
+    <option value="Paracetamol">
+      Paracetamol
+    </option>
+
+    <option value="Ibuprofeno">
+      Ibuprofeno
+    </option>
+
+    <option value="Amoxicilina">
+      Amoxicilina
+    </option>
+
+    <option value="Azitromicina">
+      Azitromicina
+    </option>
+
+    <option value="Cefalexina">
+      Cefalexina
+    </option>
+
+    <option value="Omeprazol">
+      Omeprazol
+    </option>
+
+    <option value="Loratadina">
+      Loratadina
+    </option>
+
+    <option value="Cetirizina">
+      Cetirizina
+    </option>
+
+    <option value="Prednisona">
+      Prednisona
+    </option>
+
   </select>
 
 
@@ -377,7 +531,7 @@
 
 
 <!-- ==================================================
-     FORMULÁRIO DE ALTA
+     MODAL DE ALTA
 ================================================== -->
 
 <div
@@ -386,10 +540,8 @@
 >
 
 
-  <div class="modal-alta-content">
+  <div class="modal-alta-conteudo">
 
-
-    <!-- CABEÇALHO -->
 
     <div class="modal-alta-header">
 
@@ -399,7 +551,7 @@
 
 
       <button
-        class="btn-fechar-alta"
+        class="fechar-modal"
         onclick="fecharAlta()"
       >
         ×
@@ -445,7 +597,7 @@
       </div>
 
 
-      <!-- DATA DA ALTA -->
+      <!-- DATA -->
 
       <div class="campo-alta">
 
@@ -462,7 +614,7 @@
       </div>
 
 
-      <!-- TIPO DE ALTA -->
+      <!-- TIPO -->
 
       <div class="campo-alta">
 
@@ -470,13 +622,14 @@
           Tipo de alta
         </label>
 
+
         <select
           id="altaTipo"
           required
         >
 
           <option value="">
-            Selecione o tipo
+            Selecione
           </option>
 
           <option value="ALTA_MEDICA">
@@ -525,6 +678,7 @@
           Condição do paciente
         </label>
 
+
         <select
           id="altaCondicao"
           required
@@ -551,6 +705,36 @@
       </div>
 
 
+      <!-- ==================================================
+           MEDICAÇÕES DA ALTA
+      ================================================== -->
+
+      <div class="campo-alta">
+
+        <label>
+          💊 Medicações para o paciente
+        </label>
+
+
+        <div
+          class="medicacoes-box"
+          id="listaMedicacoesAlta"
+        >
+
+        </div>
+
+
+        <button
+          type="button"
+          class="btn-adicionar-medicacao"
+          onclick="adicionarMedicacaoAlta()"
+        >
+          ➕ Adicionar medicação
+        </button>
+
+      </div>
+
+
       <!-- ORIENTAÇÕES -->
 
       <div class="campo-alta">
@@ -559,9 +743,10 @@
           Orientações ao paciente
         </label>
 
+
         <textarea
           id="altaOrientacoes"
-          placeholder="Digite as orientações para o paciente..."
+          placeholder="Digite as orientações..."
         ></textarea>
 
       </div>
@@ -574,6 +759,7 @@
         <label>
           Observações
         </label>
+
 
         <textarea
           id="altaObservacoes"
@@ -600,7 +786,7 @@
           type="submit"
           class="btn-confirmar-alta"
         >
-          Confirmar alta
+          ✅ Confirmar alta
         </button>
 
       </div>
@@ -618,6 +804,59 @@
 
 
 let triagensCarregadas = [];
+
+let contadorMedicacoes = 0;
+
+
+
+/* ==================================================
+   LISTA DE MEDICAÇÕES
+================================================== */
+
+const listaDeMedicacoes = [
+
+  "Dipirona",
+
+  "Paracetamol",
+
+  "Ibuprofeno",
+
+  "Amoxicilina",
+
+  "Azitromicina",
+
+  "Cefalexina",
+
+  "Omeprazol",
+
+  "Loratadina",
+
+  "Cetirizina",
+
+  "Prednisona",
+
+  "Diclofenaco",
+
+  "Nimesulida",
+
+  "Metformina",
+
+  "Losartana",
+
+  "Enalapril",
+
+  "Atenolol",
+
+  "Sinvastatina",
+
+  "Atorvastatina",
+
+  "AAS",
+
+  "Clonazepam"
+
+];
+
 
 
 /* ==================================================
@@ -643,7 +882,7 @@ function carregar() {
       if (data.length === 0) {
 
         div.innerHTML =
-          "<p style='color:#888; text-align:center;'>Nenhum paciente na fila.</p>";
+          "<p style='color:#888;text-align:center;'>Nenhum paciente na fila.</p>";
 
         return;
 
@@ -660,18 +899,15 @@ function carregar() {
               ${t.nome}
             </h3>
 
-
             <p>
               <b>Sintoma:</b>
               ${t.sintoma || "Não informado"}
             </p>
 
-
             <p>
               <b>Temperatura:</b>
               ${t.temperatura || "Não informada"}°C
             </p>
-
 
             <p>
               <span class="${t.risco}">
@@ -679,12 +915,10 @@ function carregar() {
               </span>
             </p>
 
-
             <p>
               <b>Alergia:</b>
               ${t.alergia || "Nenhuma"}
             </p>
-
 
             <p>
               <b>Observação:</b>
@@ -699,16 +933,12 @@ function carregar() {
             ">
 
 
-              <!-- BOTÃO ORIGINAL -->
-
               <button
                 onclick="selecionar(${index})"
               >
                 Atender
               </button>
 
-
-              <!-- BOTÃO ORIGINAL DA TV -->
 
               <button
                 class="btn-tv"
@@ -717,8 +947,6 @@ function carregar() {
                 📺 Chamar na TV
               </button>
 
-
-              <!-- NOVO BOTÃO -->
 
               <button
                 class="btn-alta"
@@ -773,14 +1001,11 @@ function chamarNaTV(nome) {
 
     body: JSON.stringify({
 
-      localTipo:
-        "CONSULTÓRIO",
+      localTipo: "CONSULTÓRIO",
 
-      localNumero:
-        consultorio,
+      localNumero: consultorio,
 
-      paciente:
-        nome
+      paciente: nome
 
     })
 
@@ -821,7 +1046,8 @@ function selecionar(index) {
 
   document.getElementById(
     "obs"
-  ).value = t.observacao || "";
+  ).value =
+    t.observacao || "";
 
 
   if (
@@ -841,7 +1067,7 @@ function selecionar(index) {
 
 
 /* ==================================================
-   ABRIR FORMULÁRIO DE ALTA
+   ABRIR ALTA
 ================================================== */
 
 function abrirAlta(nome) {
@@ -856,17 +1082,19 @@ function abrirAlta(nome) {
   ).textContent = nome;
 
 
-  // Data atual
+  const hoje =
+    new Date();
 
-  const hoje = new Date();
 
   const ano =
     hoje.getFullYear();
+
 
   const mes =
     String(
       hoje.getMonth() + 1
     ).padStart(2, "0");
+
 
   const dia =
     String(
@@ -880,7 +1108,16 @@ function abrirAlta(nome) {
     `${ano}-${mes}-${dia}`;
 
 
-  // Abre o formulário
+  document.getElementById(
+    "listaMedicacoesAlta"
+  ).innerHTML = "";
+
+
+  contadorMedicacoes = 0;
+
+
+  adicionarMedicacaoAlta();
+
 
   document.getElementById(
     "modalAlta"
@@ -891,7 +1128,7 @@ function abrirAlta(nome) {
 
 
 /* ==================================================
-   FECHAR FORMULÁRIO
+   FECHAR ALTA
 ================================================== */
 
 function fecharAlta() {
@@ -899,6 +1136,155 @@ function fecharAlta() {
   document.getElementById(
     "modalAlta"
   ).style.display = "none";
+
+}
+
+
+
+/* ==================================================
+   ADICIONAR MEDICAÇÃO
+================================================== */
+
+function adicionarMedicacaoAlta() {
+
+  contadorMedicacoes++;
+
+
+  const id =
+    contadorMedicacoes;
+
+
+  const div =
+    document.createElement("div");
+
+
+  div.className =
+    "medicacao-item";
+
+
+  div.id =
+    "medicacao-" + id;
+
+
+  let opcoes = `
+
+    <option value="">
+      Selecione a medicação
+    </option>
+
+  `;
+
+
+  listaDeMedicacoes.forEach(medicamento => {
+
+    opcoes += `
+
+      <option value="${medicamento}">
+        ${medicamento}
+      </option>
+
+    `;
+
+  });
+
+
+  div.innerHTML = `
+
+    <div class="medicacao-titulo">
+      💊 Medicação ${id}
+    </div>
+
+
+    <div class="campo-alta">
+
+      <label>
+        Medicamento
+      </label>
+
+
+      <select
+        class="medicacao-select"
+        required
+      >
+
+        ${opcoes}
+
+      </select>
+
+    </div>
+
+
+    <div class="campo-alta">
+
+      <label>
+        Posologia
+      </label>
+
+
+      <input
+        type="text"
+        class="posologia"
+        placeholder="Ex.: 1 comprimido a cada 8 horas"
+        required
+      >
+
+    </div>
+
+
+    <div class="campo-alta">
+
+      <label>
+        Duração
+      </label>
+
+
+      <input
+        type="text"
+        class="duracao"
+        placeholder="Ex.: 7 dias"
+      >
+
+    </div>
+
+
+    <button
+      type="button"
+      class="btn-remover-medicacao"
+      onclick="removerMedicacao(${id})"
+    >
+      🗑 Remover
+    </button>
+
+  `;
+
+
+  document
+    .getElementById(
+      "listaMedicacoesAlta"
+    )
+    .appendChild(div);
+
+}
+
+
+
+/* ==================================================
+   REMOVER MEDICAÇÃO
+================================================== */
+
+function removerMedicacao(id) {
+
+  const item =
+    document.getElementById(
+      "medicacao-" + id
+    );
+
+
+  if (item) {
+
+    item.remove();
+
+  }
 
 }
 
@@ -915,6 +1301,64 @@ document
     function(event) {
 
       event.preventDefault();
+
+
+      const medicamentos = [];
+
+
+      document
+        .querySelectorAll(".medicacao-item")
+        .forEach(item => {
+
+          const medicacao =
+            item.querySelector(
+              ".medicacao-select"
+            ).value;
+
+
+          const posologia =
+            item.querySelector(
+              ".posologia"
+            ).value;
+
+
+          const duracao =
+            item.querySelector(
+              ".duracao"
+            ).value;
+
+
+          if (medicacao) {
+
+            medicamentos.push({
+
+              medicacao:
+                medicacao,
+
+              posologia:
+                posologia,
+
+              duracao:
+                duracao
+
+            });
+
+          }
+
+        });
+
+
+      if (
+        medicamentos.length === 0
+      ) {
+
+        alert(
+          "Selecione pelo menos uma medicação."
+        );
+
+        return;
+
+      }
 
 
       const dadosAlta = {
@@ -944,6 +1388,9 @@ document
             "altaCondicao"
           ).value,
 
+        medicamentos:
+          medicamentos,
+
         orientacoes:
           document.getElementById(
             "altaOrientacoes"
@@ -962,15 +1409,6 @@ document
         dadosAlta
       );
 
-
-      /*
-        Envia para o backend.
-
-        Seu servidor precisa ter:
-
-        POST /alta
-
-      */
 
       fetch("/alta", {
 
@@ -1021,6 +1459,13 @@ document
           .reset();
 
 
+        document
+          .getElementById(
+            "listaMedicacoesAlta"
+          )
+          .innerHTML = "";
+
+
         carregar();
 
       })
@@ -1037,65 +1482,6 @@ document
 
     }
   );
-
-
-
-/* ==================================================
-   MEDICAÇÕES
-================================================== */
-
-function carregarMedicacoes() {
-
-  fetch("/lista-medicacoes")
-
-    .then(r => r.json())
-
-    .then(data => {
-
-      const select =
-        document.getElementById(
-          "medicacao"
-        );
-
-
-      select.innerHTML = `
-        <option value="">
-          Selecione a medicação
-        </option>
-      `;
-
-
-      data.forEach(med => {
-
-        const option =
-          document.createElement(
-            "option"
-          );
-
-
-        option.value = med;
-
-        option.textContent = med;
-
-
-        select.appendChild(
-          option
-        );
-
-      });
-
-    })
-
-    .catch(error => {
-
-      console.error(
-        "Erro ao carregar medicações:",
-        error
-      );
-
-    });
-
-}
 
 
 
@@ -1211,23 +1597,6 @@ function salvar() {
 
 
 /* ==================================================
-   INICIAR
-================================================== */
-
-carregar();
-
-carregarMedicacoes();
-
-
-/* Atualiza pacientes a cada 10 segundos */
-
-setInterval(
-  carregar,
-  10000
-);
-
-
-/* ==================================================
    FECHAR MODAL CLICANDO FORA
 ================================================== */
 
@@ -1241,15 +1610,29 @@ window.addEventListener(
       );
 
 
-    if (
-      event.target === modal
-    ) {
+    if (event.target === modal) {
 
       fecharAlta();
 
     }
 
   }
+);
+
+
+
+/* ==================================================
+   INICIAR
+================================================== */
+
+carregar();
+
+
+/* Atualiza a fila */
+
+setInterval(
+  carregar,
+  10000
 );
 
 </script>
