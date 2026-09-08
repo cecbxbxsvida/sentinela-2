@@ -1,9 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
+
 <head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="css/style.css">
 
+  <title>Painel Médico</title>
+
   <style>
+
     .btn-tv {
       background: #28a745;
       color: white;
@@ -19,6 +27,7 @@
       background: #1e7e34;
     }
 
+
     .btn-abrir-tv {
       background: #17a2b8;
       color: white;
@@ -32,6 +41,7 @@
     .btn-abrir-tv:hover {
       background: #117a8b;
     }
+
 
     .consultorio-input {
       display: flex;
@@ -79,137 +89,310 @@
 
 
     /* =========================
-       MODAL DE ALTA
+       MODAL
     ========================= */
 
     .modal-alta {
       display: none;
+
       position: fixed;
+
       z-index: 9999;
+
       left: 0;
       top: 0;
+
       width: 100%;
       height: 100%;
+
       background: rgba(0, 0, 0, 0.55);
 
       align-items: center;
       justify-content: center;
     }
 
+
     .modal-alta-conteudo {
+
       background: white;
+
       width: 95%;
-      max-width: 650px;
+      max-width: 700px;
+
       max-height: 90vh;
+
       overflow-y: auto;
 
       padding: 25px;
+
       border-radius: 10px;
 
-      box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+      box-shadow:
+        0 5px 25px rgba(0,0,0,0.3);
     }
 
+
     .modal-alta-header {
+
       display: flex;
+
       justify-content: space-between;
+
       align-items: center;
 
       margin-bottom: 20px;
+
       border-bottom: 1px solid #ddd;
+
       padding-bottom: 12px;
     }
 
+
     .modal-alta-header h2 {
+
       margin: 0;
+
       color: #dc3545;
     }
 
+
     .fechar-modal {
+
       background: transparent;
+
       border: none;
+
       font-size: 28px;
+
       cursor: pointer;
+
       color: #666;
     }
 
+
+    /* =========================
+       CAMPOS
+    ========================= */
+
     .campo-alta {
+
       margin-bottom: 16px;
     }
 
+
     .campo-alta label {
+
       display: block;
+
       margin-bottom: 6px;
+
       font-weight: bold;
+
       color: #333;
     }
+
 
     .campo-alta input,
     .campo-alta select,
     .campo-alta textarea {
+
       width: 100%;
+
       padding: 10px;
+
       border: 1px solid #ccc;
+
       border-radius: 5px;
+
       font-size: 14px;
+
       box-sizing: border-box;
     }
 
+
     .campo-alta textarea {
+
       min-height: 90px;
+
       resize: vertical;
     }
 
-    .botoes-alta {
+
+    /* =========================
+       MEDICAÇÕES
+    ========================= */
+
+    .medicacao-item {
+
+      background: #f8f9fa;
+
+      border: 1px solid #ddd;
+
+      border-radius: 7px;
+
+      padding: 15px;
+
+      margin-bottom: 12px;
+    }
+
+
+    .medicacao-item-header {
+
       display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      margin-bottom: 10px;
+    }
+
+
+    .medicacao-item-header strong {
+
+      color: #333;
+    }
+
+
+    .btn-remover-medicacao {
+
+      background: #dc3545;
+
+      color: white;
+
+      border: none;
+
+      padding: 5px 9px;
+
+      border-radius: 4px;
+
+      cursor: pointer;
+    }
+
+
+    .btn-adicionar-medicacao {
+
+      background: #007bff;
+
+      color: white;
+
+      border: none;
+
+      padding: 9px 15px;
+
+      border-radius: 5px;
+
+      cursor: pointer;
+
+      margin-bottom: 20px;
+    }
+
+
+    .btn-adicionar-medicacao:hover {
+
+      background: #0056b3;
+    }
+
+
+    /* =========================
+       BOTÕES
+    ========================= */
+
+    .botoes-alta {
+
+      display: flex;
+
       justify-content: flex-end;
+
       gap: 10px;
+
       margin-top: 20px;
     }
 
+
     .btn-cancelar-alta {
+
       background: #6c757d;
+
       color: white;
+
       border: none;
+
       padding: 10px 18px;
+
       border-radius: 5px;
+
       cursor: pointer;
     }
 
+
     .btn-confirmar-alta {
+
       background: #dc3545;
+
       color: white;
+
       border: none;
+
       padding: 10px 18px;
+
       border-radius: 5px;
+
       cursor: pointer;
+
       font-weight: bold;
     }
 
+
     .btn-confirmar-alta:hover {
+
       background: #b02a37;
     }
 
+
+    /* =========================
+       INFORMAÇÃO DO PACIENTE
+    ========================= */
+
     .info-paciente-alta {
+
       background: #f8f9fa;
+
       padding: 12px;
+
       border-radius: 6px;
+
       margin-bottom: 20px;
+
       border-left: 4px solid #dc3545;
     }
+
   </style>
+
 </head>
 
 
 <body>
 
+
 <div class="container">
 
-  <!-- Cabeçalho -->
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+
+  <!-- =========================
+       CABEÇALHO
+  ========================= -->
+
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+  ">
 
     <h2 style="margin:0;">
       🩺 Painel Médico
     </h2>
+
 
     <button
       class="btn-abrir-tv"
@@ -221,7 +404,10 @@
   </div>
 
 
-  <!-- Consultório -->
+  <!-- =========================
+       CONSULTÓRIO
+  ========================= -->
+
   <div class="consultorio-input">
 
     <label>
@@ -234,24 +420,34 @@
       value="01"
     >
 
-    <span style="color:#666; font-size:13px;">
+    <span style="
+      color:#666;
+      font-size:13px;
+    ">
       Este número será exibido na TV ao chamar o paciente.
     </span>
 
   </div>
 
 
-  <!-- Lista de pacientes -->
+  <!-- =========================
+       TRIAGENS
+  ========================= -->
+
   <div id="triagens"></div>
 
 
   <hr>
 
 
-  <!-- Consulta -->
+  <!-- =========================
+       CONSULTA
+  ========================= -->
+
   <h3>
     Consulta
   </h3>
+
 
   <input
     id="paciente"
@@ -259,46 +455,58 @@
     readonly
   >
 
+
   <input
     id="diagnostico"
     placeholder="Diagnóstico"
   >
 
+
   <select id="medicacao">
+
     <option value="">
       Selecione a medicação
     </option>
+
   </select>
+
 
   <textarea
     id="obs"
     placeholder="Observações"
   ></textarea>
 
+
   <button onclick="salvar()">
     Salvar
   </button>
+
 
 </div>
 
 
 
-<!-- ==================================
-     MODAL FORMULÁRIO DE ALTA
-================================== -->
+<!-- ==================================================
+     MODAL DE ALTA
+================================================== -->
 
 <div
   id="modalAlta"
   class="modal-alta"
 >
 
+
   <div class="modal-alta-conteudo">
+
+
+    <!-- CABEÇALHO DO MODAL -->
 
     <div class="modal-alta-header">
 
       <h2>
         🏥 Alta do Paciente
       </h2>
+
 
       <button
         class="fechar-modal"
@@ -310,7 +518,8 @@
     </div>
 
 
-    <!-- Informações do paciente -->
+    <!-- PACIENTE -->
+
     <div class="info-paciente-alta">
 
       <strong>
@@ -325,10 +534,12 @@
 
 
     <!-- FORMULÁRIO -->
+
     <form id="formularioAlta">
 
 
-      <!-- Paciente -->
+      <!-- PACIENTE -->
+
       <div class="campo-alta">
 
         <label>
@@ -344,7 +555,8 @@
       </div>
 
 
-      <!-- Data -->
+      <!-- DATA -->
+
       <div class="campo-alta">
 
         <label>
@@ -360,12 +572,14 @@
       </div>
 
 
-      <!-- Tipo -->
+      <!-- TIPO -->
+
       <div class="campo-alta">
 
         <label>
           Tipo de alta
         </label>
+
 
         <select
           id="altaTipo"
@@ -373,7 +587,7 @@
         >
 
           <option value="">
-            Selecione o tipo de alta
+            Selecione o tipo
           </option>
 
           <option value="ALTA_MEDICA">
@@ -397,7 +611,8 @@
       </div>
 
 
-      <!-- Diagnóstico -->
+      <!-- DIAGNÓSTICO -->
+
       <div class="campo-alta">
 
         <label>
@@ -413,12 +628,14 @@
       </div>
 
 
-      <!-- Condição -->
+      <!-- CONDIÇÃO -->
+
       <div class="campo-alta">
 
         <label>
           Condição do paciente na alta
         </label>
+
 
         <select
           id="altaCondicao"
@@ -446,7 +663,33 @@
       </div>
 
 
-      <!-- Orientações -->
+      <!-- ==================================================
+           MEDICAÇÕES
+      ================================================== -->
+
+      <div class="campo-alta">
+
+        <label>
+          💊 Medicações para alta
+        </label>
+
+
+        <div id="listaMedicacoesAlta"></div>
+
+
+        <button
+          type="button"
+          class="btn-adicionar-medicacao"
+          onclick="adicionarMedicacaoAlta()"
+        >
+          + Adicionar medicação
+        </button>
+
+      </div>
+
+
+      <!-- ORIENTAÇÕES -->
+
       <div class="campo-alta">
 
         <label>
@@ -461,22 +704,8 @@
       </div>
 
 
-      <!-- Medicamentos -->
-      <div class="campo-alta">
+      <!-- OBSERVAÇÕES -->
 
-        <label>
-          Medicamentos / Prescrição
-        </label>
-
-        <textarea
-          id="altaMedicamentos"
-          placeholder="Informe os medicamentos e prescrições..."
-        ></textarea>
-
-      </div>
-
-
-      <!-- Observações -->
       <div class="campo-alta">
 
         <label>
@@ -491,7 +720,8 @@
       </div>
 
 
-      <!-- Botões -->
+      <!-- BOTÕES -->
+
       <div class="botoes-alta">
 
         <button
@@ -502,6 +732,7 @@
           Cancelar
         </button>
 
+
         <button
           type="submit"
           class="btn-confirmar-alta"
@@ -511,7 +742,9 @@
 
       </div>
 
+
     </form>
+
 
   </div>
 
@@ -521,13 +754,20 @@
 
 <script>
 
+
+/* ==================================================
+   VARIÁVEIS
+================================================== */
+
 let triagensCarregadas = [];
 
+let contadorMedicacoes = 0;
 
 
-/* ==================================
-   CARREGAR PACIENTES
-================================== */
+
+/* ==================================================
+   CARREGAR TRIAGENS
+================================================== */
 
 function carregar() {
 
@@ -539,7 +779,8 @@ function carregar() {
 
       triagensCarregadas = data;
 
-      const div = document.getElementById("triagens");
+      const div =
+        document.getElementById("triagens");
 
       div.innerHTML = "";
 
@@ -547,7 +788,7 @@ function carregar() {
       if (data.length === 0) {
 
         div.innerHTML =
-          "<p style='color:#888; text-align:center;'>Nenhum paciente na fila.</p>";
+          "<p style='color:#888;text-align:center;'>Nenhum paciente na fila.</p>";
 
         return;
 
@@ -591,7 +832,12 @@ function carregar() {
             </p>
 
 
-            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <div style="
+              display:flex;
+              gap:8px;
+              flex-wrap:wrap;
+            ">
+
 
               <button
                 onclick="selecionar(${index})"
@@ -608,13 +854,13 @@ function carregar() {
               </button>
 
 
-              <!-- NOVO BOTÃO -->
               <button
                 class="btn-alta"
                 onclick="abrirAlta('${t.nome}')"
               >
                 🏥 Dar alta
               </button>
+
 
             </div>
 
@@ -624,15 +870,24 @@ function carregar() {
 
       });
 
+    })
+
+    .catch(error => {
+
+      console.error(
+        "Erro ao carregar triagens:",
+        error
+      );
+
     });
 
 }
 
 
 
-/* ==================================
+/* ==================================================
    CHAMAR NA TV
-================================== */
+================================================== */
 
 function chamarNaTV(nome) {
 
@@ -672,19 +927,30 @@ function chamarNaTV(nome) {
       "!"
     );
 
+  })
+
+  .catch(error => {
+
+    console.error(error);
+
+    alert(
+      "❌ Não foi possível chamar o paciente."
+    );
+
   });
 
 }
 
 
 
-/* ==================================
+/* ==================================================
    SELECIONAR PACIENTE
-================================== */
+================================================== */
 
 function selecionar(index) {
 
-  const t = triagensCarregadas[index];
+  const t =
+    triagensCarregadas[index];
 
 
   document.getElementById("paciente").value =
@@ -695,7 +961,10 @@ function selecionar(index) {
     t.observacao || "";
 
 
-  if (t.alergia && t.alergia !== "Nenhuma") {
+  if (
+    t.alergia &&
+    t.alergia !== "Nenhuma"
+  ) {
 
     alert(
       "⚠️ Paciente possui alergia: " +
@@ -708,39 +977,59 @@ function selecionar(index) {
 
 
 
-/* ==================================
-   ABRIR FORMULÁRIO DE ALTA
-================================== */
+/* ==================================================
+   ABRIR ALTA
+================================================== */
 
 function abrirAlta(nome) {
 
-  // Coloca o nome do paciente
   document.getElementById("altaPaciente").value =
     nome;
+
 
   document.getElementById("altaPacienteNome").textContent =
     nome;
 
 
-  // Coloca a data atual
+  // Data atual
+
   const hoje = new Date();
 
-  const ano = hoje.getFullYear();
+  const ano =
+    hoje.getFullYear();
 
   const mes =
-    String(hoje.getMonth() + 1)
-    .padStart(2, "0");
+    String(
+      hoje.getMonth() + 1
+    ).padStart(2, "0");
 
   const dia =
-    String(hoje.getDate())
-    .padStart(2, "0");
+    String(
+      hoje.getDate()
+    ).padStart(2, "0");
 
 
   document.getElementById("altaData").value =
     `${ano}-${mes}-${dia}`;
 
 
-  // Abre o modal
+  // Limpa medicações anteriores
+
+  document.getElementById(
+    "listaMedicacoesAlta"
+  ).innerHTML = "";
+
+
+  contadorMedicacoes = 0;
+
+
+  // Adiciona primeira medicação
+
+  adicionarMedicacaoAlta();
+
+
+  // Abre modal
+
   document.getElementById("modalAlta").style.display =
     "flex";
 
@@ -748,9 +1037,9 @@ function abrirAlta(nome) {
 
 
 
-/* ==================================
-   FECHAR FORMULÁRIO DE ALTA
-================================== */
+/* ==================================================
+   FECHAR ALTA
+================================================== */
 
 function fecharAlta() {
 
@@ -761,115 +1050,204 @@ function fecharAlta() {
 
 
 
-/* ==================================
-   CONFIRMAR ALTA
-================================== */
+/* ==================================================
+   ADICIONAR MEDICAÇÃO
+================================================== */
 
-document
-  .getElementById("formularioAlta")
-  .addEventListener("submit", function(event) {
+function adicionarMedicacaoAlta() {
 
-    event.preventDefault();
+  contadorMedicacoes++;
 
 
-    const dadosAlta = {
-
-      paciente:
-        document.getElementById("altaPaciente").value,
-
-      dataAlta:
-        document.getElementById("altaData").value,
-
-      tipoAlta:
-        document.getElementById("altaTipo").value,
-
-      diagnostico:
-        document.getElementById("altaDiagnostico").value,
-
-      condicao:
-        document.getElementById("altaCondicao").value,
-
-      orientacoes:
-        document.getElementById("altaOrientacoes").value,
-
-      medicamentos:
-        document.getElementById("altaMedicamentos").value,
-
-      observacoes:
-        document.getElementById("altaObservacoes").value
-
-    };
+  const id =
+    contadorMedicacoes;
 
 
-    console.log("Dados da alta:", dadosAlta);
+  const div =
+    document.createElement("div");
 
 
-    /*
-      ENVIA PARA O BACKEND
+  div.className =
+    "medicacao-item";
 
-      Crie no seu servidor a rota:
 
-      POST /alta
+  div.id =
+    "medicacao-item-" + id;
 
-      para receber os dados.
 
-    */
+  div.innerHTML = `
 
-    fetch("/alta", {
+    <div class="medicacao-item-header">
 
-      method: "POST",
+      <strong>
+        Medicação ${id}
+      </strong>
 
-      headers: {
-        "Content-Type": "application/json"
-      },
+      <button
+        type="button"
+        class="btn-remover-medicacao"
+        onclick="removerMedicacaoAlta(${id})"
+      >
+        Remover
+      </button>
 
-      body: JSON.stringify(dadosAlta)
+    </div>
 
-    })
+
+    <div class="campo-alta">
+
+      <label>
+        Medicação
+      </label>
+
+      <select
+        class="alta-medicacao-select"
+        required
+      >
+
+        <option value="">
+          Carregando medicações...
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="campo-alta">
+
+      <label>
+        Posologia
+      </label>
+
+      <input
+        type="text"
+        class="alta-posologia"
+        placeholder="Ex.: 1 comprimido a cada 8 horas"
+        required
+      >
+
+    </div>
+
+
+    <div class="campo-alta">
+
+      <label>
+        Duração do tratamento
+      </label>
+
+      <input
+        type="text"
+        class="alta-duracao"
+        placeholder="Ex.: 7 dias"
+      >
+
+    </div>
+
+  `;
+
+
+  document
+    .getElementById("listaMedicacoesAlta")
+    .appendChild(div);
+
+
+  carregarListaMedicacoesNoSelect(
+    div.querySelector(".alta-medicacao-select")
+  );
+
+}
+
+
+
+/* ==================================================
+   REMOVER MEDICAÇÃO
+================================================== */
+
+function removerMedicacaoAlta(id) {
+
+  const item =
+    document.getElementById(
+      "medicacao-item-" + id
+    );
+
+
+  if (item) {
+
+    item.remove();
+
+  }
+
+}
+
+
+
+/* ==================================================
+   CARREGAR MEDICAÇÕES NO SELECT DA ALTA
+================================================== */
+
+function carregarListaMedicacoesNoSelect(select) {
+
+  fetch("/lista-medicacoes")
 
     .then(r => r.json())
 
-    .then(() => {
+    .then(data => {
 
-      alert(
-        "✅ Alta do paciente " +
-        dadosAlta.paciente +
-        " registrada com sucesso!"
-      );
+      select.innerHTML = `
 
+        <option value="">
+          Selecione a medicação
+        </option>
 
-      // Fecha o formulário
-      fecharAlta();
+      `;
 
 
-      // Limpa o formulário
-      document
-        .getElementById("formularioAlta")
-        .reset();
+      data.forEach(med => {
+
+        const option =
+          document.createElement("option");
 
 
-      // Atualiza a fila
-      carregar();
+        option.value =
+          med;
+
+
+        option.textContent =
+          med;
+
+
+        select.appendChild(option);
+
+      });
 
     })
 
     .catch(error => {
 
-      console.error(error);
-
-      alert(
-        "❌ Não foi possível registrar a alta."
+      console.error(
+        "Erro ao carregar medicações:",
+        error
       );
+
+
+      select.innerHTML = `
+
+        <option value="">
+          Erro ao carregar medicações
+        </option>
+
+      `;
 
     });
 
-  });
+}
 
 
 
-/* ==================================
-   MEDICAÇÕES
-================================== */
+/* ==================================================
+   CARREGAR MEDICAÇÕES DA CONSULTA
+================================================== */
 
 function carregarMedicacoes() {
 
@@ -883,10 +1261,13 @@ function carregarMedicacoes() {
         document.getElementById("medicacao");
 
 
-      select.innerHTML =
-        `<option value="">
+      select.innerHTML = `
+
+        <option value="">
           Selecione a medicação
-        </option>`;
+        </option>
+
+      `;
 
 
       data.forEach(med => {
@@ -894,9 +1275,14 @@ function carregarMedicacoes() {
         const option =
           document.createElement("option");
 
-        option.value = med;
 
-        option.textContent = med;
+        option.value =
+          med;
+
+
+        option.textContent =
+          med;
+
 
         select.appendChild(option);
 
@@ -908,23 +1294,253 @@ function carregarMedicacoes() {
 
 
 
-/* ==================================
+/* ==================================================
+   CONFIRMAR ALTA
+================================================== */
+
+document
+  .getElementById("formularioAlta")
+  .addEventListener(
+    "submit",
+    function(event) {
+
+      event.preventDefault();
+
+
+      /* -----------------------------
+         PEGAR MEDICAÇÕES
+      ----------------------------- */
+
+      const medicamentos = [];
+
+
+      document
+        .querySelectorAll(".medicacao-item")
+        .forEach(item => {
+
+          const medicacao =
+            item.querySelector(
+              ".alta-medicacao-select"
+            ).value;
+
+
+          const posologia =
+            item.querySelector(
+              ".alta-posologia"
+            ).value;
+
+
+          const duracao =
+            item.querySelector(
+              ".alta-duracao"
+            ).value;
+
+
+          if (medicacao) {
+
+            medicamentos.push({
+
+              medicacao:
+                medicacao,
+
+              posologia:
+                posologia,
+
+              duracao:
+                duracao
+
+            });
+
+          }
+
+        });
+
+
+      /* -----------------------------
+         VERIFICAR MEDICAÇÃO
+      ----------------------------- */
+
+      if (medicamentos.length === 0) {
+
+        alert(
+          "Selecione pelo menos uma medicação."
+        );
+
+        return;
+
+      }
+
+
+      /* -----------------------------
+         DADOS DA ALTA
+      ----------------------------- */
+
+      const dadosAlta = {
+
+        paciente:
+          document.getElementById(
+            "altaPaciente"
+          ).value,
+
+
+        dataAlta:
+          document.getElementById(
+            "altaData"
+          ).value,
+
+
+        tipoAlta:
+          document.getElementById(
+            "altaTipo"
+          ).value,
+
+
+        diagnostico:
+          document.getElementById(
+            "altaDiagnostico"
+          ).value,
+
+
+        condicao:
+          document.getElementById(
+            "altaCondicao"
+          ).value,
+
+
+        medicamentos:
+          medicamentos,
+
+
+        orientacoes:
+          document.getElementById(
+            "altaOrientacoes"
+          ).value,
+
+
+        observacoes:
+          document.getElementById(
+            "altaObservacoes"
+          ).value
+
+      };
+
+
+      console.log(
+        "Dados da alta:",
+        dadosAlta
+      );
+
+
+      /* -----------------------------
+         ENVIAR PARA O SERVIDOR
+      ----------------------------- */
+
+      fetch("/alta", {
+
+        method: "POST",
+
+        headers: {
+
+          "Content-Type":
+            "application/json"
+
+        },
+
+        body:
+          JSON.stringify(
+            dadosAlta
+          )
+
+      })
+
+      .then(r => {
+
+        if (!r.ok) {
+
+          throw new Error(
+            "Erro ao registrar alta"
+          );
+
+        }
+
+        return r.json();
+
+      })
+
+      .then(() => {
+
+        alert(
+          "✅ Alta do paciente " +
+          dadosAlta.paciente +
+          " registrada com sucesso!"
+        );
+
+
+        fecharAlta();
+
+
+        document
+          .getElementById(
+            "formularioAlta"
+          )
+          .reset();
+
+
+        document
+          .getElementById(
+            "listaMedicacoesAlta"
+          )
+          .innerHTML = "";
+
+
+        carregar();
+
+      })
+
+      .catch(error => {
+
+        console.error(error);
+
+
+        alert(
+          "❌ Não foi possível registrar a alta."
+        );
+
+      });
+
+    }
+  );
+
+
+
+/* ==================================================
    SALVAR CONSULTA
-================================== */
+================================================== */
 
 function salvar() {
 
   const paciente =
-    document.getElementById("paciente").value;
+    document.getElementById(
+      "paciente"
+    ).value;
+
 
   const diagnostico =
-    document.getElementById("diagnostico").value;
+    document.getElementById(
+      "diagnostico"
+    ).value;
+
 
   const medicacao =
-    document.getElementById("medicacao").value;
+    document.getElementById(
+      "medicacao"
+    ).value;
+
 
   const obs =
-    document.getElementById("obs").value;
+    document.getElementById(
+      "obs"
+    ).value;
 
 
   if (!paciente) {
@@ -954,7 +1570,10 @@ function salvar() {
     method: "POST",
 
     headers: {
-      "Content-Type": "application/json"
+
+      "Content-Type":
+        "application/json"
+
     },
 
     body: JSON.stringify({
@@ -977,14 +1596,29 @@ function salvar() {
     );
 
 
-    document.getElementById("diagnostico").value =
-      "";
+    document.getElementById(
+      "diagnostico"
+    ).value = "";
 
-    document.getElementById("medicacao").value =
-      "";
 
-    document.getElementById("obs").value =
-      "";
+    document.getElementById(
+      "medicacao"
+    ).value = "";
+
+
+    document.getElementById(
+      "obs"
+    ).value = "";
+
+  })
+
+  .catch(error => {
+
+    console.error(error);
+
+    alert(
+      "❌ Erro ao salvar consulta."
+    );
 
   });
 
@@ -992,44 +1626,49 @@ function salvar() {
 
 
 
-/* ==================================
+/* ==================================================
+   FECHAR MODAL CLICANDO FORA
+================================================== */
+
+window.addEventListener(
+  "click",
+  function(event) {
+
+    const modal =
+      document.getElementById(
+        "modalAlta"
+      );
+
+
+    if (event.target === modal) {
+
+      fecharAlta();
+
+    }
+
+  }
+);
+
+
+
+/* ==================================================
    INICIALIZAÇÃO
-================================== */
+================================================== */
 
 carregar();
 
 carregarMedicacoes();
 
 
-/*
-  Atualiza a lista automaticamente
-  a cada 10 segundos.
-*/
+/* Atualiza pacientes a cada 10 segundos */
 
-setInterval(carregar, 10000);
-
-
-
-/* ==================================
-   FECHAR MODAL CLICANDO FORA
-================================== */
-
-window.addEventListener("click", function(event) {
-
-  const modal =
-    document.getElementById("modalAlta");
-
-
-  if (event.target === modal) {
-
-    fecharAlta();
-
-  }
-
-});
+setInterval(
+  carregar,
+  10000
+);
 
 </script>
 
+
 </body>
 </html>
-
