@@ -1,110 +1,638 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login Hospital</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <title>Painel Médico</title>
+
+  <style>
+
+    .btn-tv {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .btn-tv:hover {
+      background: #1e7e34;
+    }
+
+    .btn-abrir-tv {
+      background: #17a2b8;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .btn-abrir-tv:hover {
+      background: #117a8b;
+    }
+
+    .btn-alta {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .btn-alta:hover {
+      background: #b02a37;
+    }
+
+    .consultorio-input {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      background: #f0f4ff;
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: 1px solid #d0d8f0;
+    }
+
+    .consultorio-input label {
+      font-weight: bold;
+    }
+
+    .consultorio-input input {
+      width: 60px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 4px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+  </style>
+
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h2>Sistema Hospitalar</h2>
+  <!-- CABEÇALHO -->
 
-        <input
-            type="text"
-            id="usuario"
-            placeholder="Usuário"
-            autocomplete="username"
-        >
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+  ">
 
-        <input
-            type="password"
-            id="senha"
-            placeholder="Senha"
-            autocomplete="current-password"
-        >
+    <h2 style="margin:0;">
+      🩺 Painel Médico
+    </h2>
 
-        <button onclick="login()">Entrar</button>
+    <button
+      class="btn-abrir-tv"
+      onclick="window.open('tv.html','_blank')"
+    >
+      📺 Abrir Tela da TV
+    </button>
 
-    </div>
+  </div>
 
-    <script>
 
-        async function login() {
+  <!-- CONSULTÓRIO -->
 
-            const usuario = document.getElementById("usuario").value.trim();
-            const senha = document.getElementById("senha").value;
+  <div class="consultorio-input">
 
-            if (!usuario || !senha) {
-                alert("Digite o usuário e a senha.");
-                return;
-            }
+    <label>
+      Meu Consultório:
+    </label>
 
-            try {
+    <input
+      type="text"
+      id="consultorio-num"
+      value="01"
+    >
 
-                const response = await fetch("/login", {
-                    method: "POST",
+    <span style="
+      color:#666;
+      font-size:13px;
+    ">
+      Este número será exibido na TV ao chamar o paciente.
+    </span>
 
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+  </div>
 
-                    body: JSON.stringify({
-                        usuario: usuario,
-                        senha: senha
-                    })
-                });
 
-                const data = await response.json();
+  <!-- PACIENTES -->
 
-                if (!response.ok) {
-                    throw new Error(data.erro || "Usuário ou senha inválidos.");
-                }
+  <div id="triagens"></div>
 
-                console.log("Login realizado:", data);
 
-                // Redireciona de acordo com o tipo de usuário
+  <hr>
 
-                if (data.tipo === "triagem") {
-                    window.location.href = "/triagem.html";
-                    return;
-                }
 
-                if (data.tipo === "medico") {
-                    window.location.href = "/medico.html";
-                    return;
-                }
+  <!-- CONSULTA -->
 
-                if (data.tipo === "atendimento") {
-                    window.location.href = "/atendimento.html";
-                    return;
-                }
+  <h3>
+    Consulta
+  </h3>
 
-                alert("Tipo de usuário não reconhecido.");
+  <input
+    id="paciente"
+    placeholder="Paciente"
+    readonly
+  >
 
-            } catch (error) {
+  <input
+    id="diagnostico"
+    placeholder="Diagnóstico"
+  >
 
-                console.error("Erro no login:", error);
+  <select id="medicacao">
 
-                alert(error.message);
-            }
-        }
+    <option value="">
+      Selecione a medicação
+    </option>
 
-        // Permite apertar ENTER para fazer login
-        document.getElementById("senha").addEventListener("keydown", function(event) {
+    <option value="Dipirona">
+      Dipirona
+    </option>
 
-            if (event.key === "Enter") {
-                login();
-            }
+    <option value="Paracetamol">
+      Paracetamol
+    </option>
 
-        });
+    <option value="Ibuprofeno">
+      Ibuprofeno
+    </option>
 
-    </script>
+    <option value="Amoxicilina">
+      Amoxicilina
+    </option>
+
+    <option value="Azitromicina">
+      Azitromicina
+    </option>
+
+    <option value="Cefalexina">
+      Cefalexina
+    </option>
+
+    <option value="Omeprazol">
+      Omeprazol
+    </option>
+
+    <option value="Loratadina">
+      Loratadina
+    </option>
+
+    <option value="Cetirizina">
+      Cetirizina
+    </option>
+
+    <option value="Prednisona">
+      Prednisona
+    </option>
+
+  </select>
+
+
+  <textarea
+    id="obs"
+    placeholder="Observações"
+  ></textarea>
+
+
+  <button onclick="salvar()">
+    Salvar
+  </button>
+
+</div>
+
+
+<script>
+
+let triagensCarregadas = [];
+
+
+/* ==================================================
+   CARREGAR PACIENTES
+================================================== */
+
+function carregar() {
+
+  fetch("/triagens")
+
+    .then(r => {
+
+      if (!r.ok) {
+        throw new Error("Erro ao carregar pacientes");
+      }
+
+      return r.json();
+
+    })
+
+    .then(data => {
+
+      triagensCarregadas = data;
+
+      const div =
+        document.getElementById("triagens");
+
+      div.innerHTML = "";
+
+
+      if (data.length === 0) {
+
+        div.innerHTML =
+          "<p style='color:#888;text-align:center;'>Nenhum paciente na fila.</p>";
+
+        return;
+
+      }
+
+
+      data.forEach((t, index) => {
+
+        div.innerHTML += `
+
+          <div class="card">
+
+            <h3>
+              ${t.nome}
+            </h3>
+
+            <p>
+              <b>Sintoma:</b>
+              ${t.sintoma || "Não informado"}
+            </p>
+
+            <p>
+              <b>Temperatura:</b>
+              ${t.temperatura || "Não informada"}°C
+            </p>
+
+            <p>
+              <span class="${t.risco}">
+                ${t.risco || "Não informado"}
+              </span>
+            </p>
+
+            <p>
+              <b>Alergia:</b>
+              ${t.alergia || "Nenhuma"}
+            </p>
+
+            <p>
+              <b>Observação:</b>
+              ${t.observacao || "Nenhuma"}
+            </p>
+
+
+            <div style="
+              display:flex;
+              gap:8px;
+              flex-wrap:wrap;
+            ">
+
+              <button
+                onclick="selecionar(${index})"
+              >
+                Atender
+              </button>
+
+
+              <button
+                class="btn-tv"
+                onclick="chamarNaTV(${index})"
+              >
+                📺 Chamar na TV
+              </button>
+
+
+              <button
+                class="btn-alta"
+                onclick="abrirAlta(${index})"
+              >
+                🏥 Dar alta
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      });
+
+    })
+
+    .catch(error => {
+
+      console.error(
+        "Erro ao carregar pacientes:",
+        error
+      );
+
+    });
+
+}
+
+
+/* ==================================================
+   CHAMAR NA TV
+================================================== */
+
+function chamarNaTV(index) {
+
+  const t =
+    triagensCarregadas[index];
+
+  if (!t) {
+    alert("Paciente não encontrado.");
+    return;
+  }
+
+
+  const consultorio =
+    document.getElementById(
+      "consultorio-num"
+    ).value || "01";
+
+
+  fetch("/tv/chamar", {
+
+    method: "POST",
+
+    headers: {
+      "Content-Type": "application/json"
+    },
+
+    body: JSON.stringify({
+
+      localTipo: "CONSULTÓRIO",
+
+      localNumero: consultorio,
+
+      paciente: t.nome
+
+    })
+
+  })
+
+  .then(r => {
+
+    if (!r.ok) {
+      throw new Error("Erro ao chamar paciente");
+    }
+
+    return r.json();
+
+  })
+
+  .then(() => {
+
+    alert(
+      "✅ " +
+      t.nome +
+      " foi chamado na TV para o Consultório " +
+      consultorio +
+      "!"
+    );
+
+  })
+
+  .catch(error => {
+
+    console.error(error);
+
+    alert(
+      "❌ Não foi possível chamar o paciente na TV."
+    );
+
+  });
+
+}
+
+
+/* ==================================================
+   SELECIONAR PACIENTE
+================================================== */
+
+function selecionar(index) {
+
+  const t =
+    triagensCarregadas[index];
+
+  if (!t) {
+    return;
+  }
+
+
+  document.getElementById(
+    "paciente"
+  ).value = t.nome;
+
+
+  document.getElementById(
+    "obs"
+  ).value =
+    t.observacao || "";
+
+
+  if (
+    t.alergia &&
+    t.alergia !== "Nenhuma"
+  ) {
+
+    alert(
+      "⚠️ Paciente possui alergia: " +
+      t.alergia
+    );
+
+  }
+
+}
+
+
+/* ==================================================
+   ABRIR PÁGINA DE ALTA
+================================================== */
+
+function abrirAlta(index) {
+
+  const t =
+    triagensCarregadas[index];
+
+  if (!t) {
+
+    alert(
+      "Paciente não encontrado."
+    );
+
+    return;
+
+  }
+
+
+  const nome =
+    encodeURIComponent(t.nome);
+
+
+  window.location.href =
+    "alta.html?paciente=" + nome;
+
+}
+
+
+/* ==================================================
+   SALVAR CONSULTA
+================================================== */
+
+function salvar() {
+
+  const paciente =
+    document.getElementById(
+      "paciente"
+    ).value;
+
+
+  const diagnostico =
+    document.getElementById(
+      "diagnostico"
+    ).value;
+
+
+  const medicacao =
+    document.getElementById(
+      "medicacao"
+    ).value;
+
+
+  const obs =
+    document.getElementById(
+      "obs"
+    ).value;
+
+
+  if (!paciente) {
+
+    alert(
+      "Selecione um paciente clicando em Atender."
+    );
+
+    return;
+
+  }
+
+
+  if (!medicacao) {
+
+    alert(
+      "Selecione uma medicação."
+    );
+
+    return;
+
+  }
+
+
+  fetch("/consulta", {
+
+    method: "POST",
+
+    headers: {
+      "Content-Type":
+        "application/json"
+    },
+
+    body: JSON.stringify({
+
+      paciente,
+      diagnostico,
+      medicacao,
+      obs
+
+    })
+
+  })
+
+  .then(r => {
+
+    if (!r.ok) {
+      throw new Error("Erro ao salvar consulta");
+    }
+
+    return r.json();
+
+  })
+
+  .then(() => {
+
+    alert(
+      "Consulta salva"
+    );
+
+
+    document.getElementById(
+      "diagnostico"
+    ).value = "";
+
+
+    document.getElementById(
+      "medicacao"
+    ).value = "";
+
+
+    document.getElementById(
+      "obs"
+    ).value = "";
+
+  })
+
+  .catch(error => {
+
+    console.error(error);
+
+    alert(
+      "❌ Erro ao salvar consulta."
+    );
+
+  });
+
+}
+
+
+/* ==================================================
+   INICIAR
+================================================== */
+
+carregar();
+
+
+/* Atualiza a fila a cada 10 segundos */
+
+setInterval(
+  carregar,
+  10000
+);
+
+</script>
 
 </body>
+
 </html>
